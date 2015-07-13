@@ -175,23 +175,11 @@ for obj in $(find /srv/kubernetes/kubefiles/master/admission-control \( -name \*
     echo "++ obj ${obj} is created ++"
 done
 
-for obj in $(find /srv/kubernetes/kubefiles/master/addons \( -name \*.yaml -o -name \*.json \)); do
-    start_addon ${obj} 100 10 default &
-    echo "++ obj ${obj} is created ++"
-done
 
-# Check if the configuration has changed recently - in case the user
-# created/updated/deleted the files on the master.
-#while true; do
-#    start_sec=$(date +"%s")
-#    #kube-addon-update.sh must be deployed in the same directory as this file
-#    `dirname $0`/kube-addon-update.sh /etc/kubernetes/kubefiles/master/admission-control ${ADDON_CHECK_INTERVAL_SEC}
-#    end_sec=$(date +"%s")
-#    len_sec=$((${end_sec}-${start_sec}))
-#    # subtract the time passed from the sleep time
-#    if [[ ${len_sec} -lt ${ADDON_CHECK_INTERVAL_SEC} ]]; then
-#        sleep_time=$((${ADDON_CHECK_INTERVAL_SEC}-${len_sec}))
-#        sleep ${sleep_time}
-#    fi
-#done
+
+    for obj in $(find /srv/kubernetes/kubefiles/master/addons \( -name \*.yaml -o -name \*.json \)); do
+        start_addon ${obj} 100 10 kube-system &
+        echo "++ obj ${obj} is created ++"
+    done
+
 wait
