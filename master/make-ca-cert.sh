@@ -26,6 +26,7 @@ cert_group=kube-cert
 if [ -f ${cert_dir}/server.key ]; then
     exit 0
 fi
+groupadd $cert_group
 
 mkdir -p "$cert_dir"
       
