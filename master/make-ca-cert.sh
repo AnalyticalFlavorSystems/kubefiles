@@ -35,6 +35,12 @@ dns_domain="${DNS_DOMAIN:="cluster.local"}"
 cert_dir="${CERT_DIR:-"/srv/kubernetes"}"
 cert_group="${CERT_GROUP:="kube-cert"}"
 
+if [ -f ${cert_dir}/ca.crt ]; then
+    exit 0
+fi
+
+groupadd $cert_group
+
 # The following certificate pairs are created:
 #
 #  - ca (the cluster's certificate authority)
