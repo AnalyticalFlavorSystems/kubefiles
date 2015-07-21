@@ -171,14 +171,14 @@ done < /srv/kubernetes/known_tokens.csv
 # are defined in a namespace other than default, we should still create the limits for the
 # default namespace.
 for obj in $(find /srv/kubernetes/kubefiles/master/admission-control \( -name \*.yaml -o -name \*.json \)); do
-    start_addon ${obj} 10 10 default &
+    start_addon ${obj} 5 10 default &
     echo "++ obj ${obj} is created ++"
 done
 
 
 
     for obj in $(find /srv/kubernetes/kubefiles/master/addons \( -name \*.yaml -o -name \*.json \)); do
-        start_addon ${obj} 10 10 kube-system &
+        start_addon ${obj} 5 10 kube-system &
         echo "++ obj ${obj} is created ++"
     done
 
