@@ -59,6 +59,13 @@ spec:
             - containerPort: 53
               name: dns-tcp
               protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 30
+            timeoutSeconds: 5
         - name: healthz
           image: gcr.io/google_containers/exechealthz:1.0
           resources:
