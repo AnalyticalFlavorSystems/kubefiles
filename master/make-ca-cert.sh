@@ -30,7 +30,7 @@ set -o pipefail
 
 cert_ip="${MASTER_IP:="${1}"}"
 master_name="${MASTER_NAME:="kubernetes"}"
-service_range="${SERVICE_CLUSTER_IP_RANGE:="10.100.0.0/16"}"
+service_range="${SERVICE_CLUSTER_IP_RANGE:="10.0.0.0/16"}"
 dns_domain="${DNS_DOMAIN:="cluster.local"}"
 cert_dir="${CERT_DIR:-"/srv/kubernetes"}"
 cert_group="${CERT_GROUP:="kube-cert"}"
