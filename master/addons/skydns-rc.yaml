@@ -36,6 +36,9 @@ spec:
             - http://127.0.0.1:2379,http://127.0.0.1:4001
             - -initial-cluster-token
             - skydns-etcd
+          volumeMounts:
+            - name: etcd-storage
+              mountPath: /var/etcd/data
         - name: kube2sky
           image: gcr.io/google_containers/kube2sky:1.11
           resources:
@@ -72,7 +75,7 @@ spec:
               path: /healthz
               port: 8080
               scheme: HTTP
-            initialDelaySeconds: 30
+            initialDelaySeconds: 1
             timeoutSeconds: 5
         - name: healthz
           image: gcr.io/google_containers/exechealthz:1.0
